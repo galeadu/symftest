@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Počítač: 127.0.0.1
--- Vytvořeno: Ned 02. zář 2018, 13:25
+-- Vytvořeno: Ned 02. zář 2018, 22:10
 -- Verze serveru: 10.1.35-MariaDB
 -- Verze PHP: 7.2.9
 
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Databáze: `symf_test`
 --
+CREATE DATABASE IF NOT EXISTS `symf_test` DEFAULT CHARACTER SET utf8 COLLATE utf8_czech_ci;
+USE `symf_test`;
 
 -- --------------------------------------------------------
 
