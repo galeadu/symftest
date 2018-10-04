@@ -6,6 +6,7 @@
  * Time: 15:50
  */
 
+
 namespace App\Components\Model\Facade;
 
 use App\DataLayer\CommentsDataLayer;
@@ -67,7 +68,7 @@ class CommentsFacade
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function insertNewComment(Comment $newcomment)
+    public function insertNewComment($newcomment)
     {
        $newcomment->setDateinsert(\DateTime::createFromFormat('Y-m-d H:i:s', date('Y-m-d H:i:s')));
        $this->dataLayer->insertItem($newcomment);
