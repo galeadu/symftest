@@ -38,6 +38,9 @@ INSERT INTO `migration_versions` (`version`) VALUES
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`id`);
 
+
+ALTER TABLE comments MODIFY id int(11) NOT NULL auto_increment;
+
 --
 -- Klíče pro tabulku `migration_versions`
 --
