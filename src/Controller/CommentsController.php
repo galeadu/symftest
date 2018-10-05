@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+
+use App\Components\Model\Mapper\Input\Comments\FormInputMapper;
+use App\Components\Model\Mapper\Input\Comments\GetInputMapper;
 use App\Entity\Comments;
 use App\Components\Model\Facade\CommentsFacade;
 
@@ -23,6 +26,8 @@ class CommentsController extends Controller
 
     /** @var \App\Components\Model\Facade\CommentsFacade **/
     protected $commentsFacade;
+
+    protected $formInputMapper;
 
 
     /**
@@ -52,12 +57,12 @@ class CommentsController extends Controller
     /**
      * @Route("/comments/form", name="comments/form")
      */
-    public function form(Request $request)
+    public function form(formInputMapper $formInputMapper, Request $request)
     {
 
-       $comments = new Comments();
+       $comment = new Comments();
 
-       $form = $this->createFormBuilder($comments)
+       $form = $this->createFormBuilder($comment)
             ->add('shortdescription', TextType::class, array('label' => 'Anotace'))
             ->add('description', TextareaType::class, array('label' => 'Text'))
             ->add('save', SubmitType::class, array('label' => 'Uložit'))
@@ -67,8 +72,13 @@ class CommentsController extends Controller
 
        if ($form->isSubmitted() && $form->isValid())
        {
-           $newcomment = $form->getData();
-           $this->commentsFacade->insertNewComment($newcomment);
+           $formdata = $formInputMapper->getInput();
+
+           //TODO zatim takto
+           $comment->setDescription($formdata->getDescription());
+           $comment->setShortdescription($formdata->getShortdescription());
+
+           $this->commentsFacade->insertNewComment($comment);
 
            return $this->redirectToRoute('comments');
        }
@@ -84,9 +94,10 @@ class CommentsController extends Controller
        /**
      * @Route("/comments/detail/{id}", name="comments/detail")
      */
-    public function detail(Request $request)
+    public function detail(GetInputMapper $getInputMapper)
     {
-       $comment = $this->commentsFacade->getDetailPageData($request->get('id'));
+
+       $comment = $this->commentsFacade->getDetailPageData($getInputMapper->getInput()->getId());
 
        return $this->render('comments/detail.html.twig', array(
              'comment' => $comment
@@ -97,9 +108,9 @@ class CommentsController extends Controller
     /**
      * @Route("/comments/delete/{id}", name="comments/delete")
      */
-    public function delete(Request $request)
+    public function delete(GetInputMapper $getInputMapper)
     {
-       $this->commentsFacade->deleteComment($request->get('id'));
+       $this->commentsFacade->deleteComment($getInputMapper->getInput()->getId());
 
        return $this->redirectToRoute('comments');
     }

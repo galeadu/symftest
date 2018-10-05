@@ -5,14 +5,14 @@ version: "3.1"
 services:
 
     mysql:
-      image: mysql:8.0
+      image: mysql:5.5
       environment:
         - MYSQL_ROOT_PASSWORD=dbrootpw
         - MYSQL_DATABASE=docker_symfony4
         - MYSQL_USER=dbuser
         - MYSQL_PASSWORD=dbpw
       ports:
-        - "8003:3306"
+        - "8010:3306"
       volumes:
         - ./mysql/data:/docker-entrypoint-initdb.d
       restart: always

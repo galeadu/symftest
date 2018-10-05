@@ -8,12 +8,13 @@
 
 namespace App\Components\Model\Mapper\Input;
 
-use App\Exception\ValidatorException;
+
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Validator\Exception\ValidatorException;
 
 abstract class AbstractInputMapper
 {

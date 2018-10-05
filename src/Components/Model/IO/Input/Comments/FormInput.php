@@ -8,12 +8,15 @@
 
 namespace App\Components\Model\IO\Input\Comments;
 
+
 use Symfony\Component\Validator\Constraints as Assert;
 
 
 
 class FormInput
 {
+
+
     /**
      * var $string
      * @Assert\NotBlank(message="Anotation string must be set")
@@ -27,6 +30,13 @@ class FormInput
      * @Assert\Type(type="string", message="Description string must be set")
      */
     protected $description;
+
+
+    /**
+     * @var
+     */
+    protected $dateinsert;
+
 
     /**
      * @return mixed
@@ -58,6 +68,22 @@ class FormInput
     public function setDescription($description): void
     {
         $this->description = $description;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDateinsert()
+    {
+        return $this->dateinsert;
+    }
+
+    /**
+     * @param mixed $dateinsert
+     */
+    public function setDateinsert($dateinsert): void
+    {
+        $this->dateinsert = $dateinsert;
     }
 
 

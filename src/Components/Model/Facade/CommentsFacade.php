@@ -10,7 +10,7 @@
 namespace App\Components\Model\Facade;
 
 use App\DataLayer\CommentsDataLayer;
-
+use App\Entity\Comments;
 
 
 /**
@@ -68,10 +68,11 @@ class CommentsFacade
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function insertNewComment($newcomment)
+    public function insertNewComment(Comments $newcomment)
     {
        $newcomment->setDateinsert(\DateTime::createFromFormat('Y-m-d H:i:s', date('Y-m-d H:i:s')));
        $this->dataLayer->insertItem($newcomment);
     }
+
 
 }
